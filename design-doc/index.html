@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>"NEST" DESIGN DOC</title>
+		<style>
+			body div.column-of-cards {
+				width: 520px;
+				float: left;
+			}
+			.card {
+				margin: 10px;
+				padding: 10px;
+				border: 1px solid gray;
+			}
+			.card { position: relative; width: 400px; margin-left:50px; }
+			.card .comment { background-color: antiquewhite;
+				/* border: 1px solid black; */
+				border-radius: 12.5px;
+				padding: 5px 10px; font-family: Arial, Helvetica, sans-serif; font-size: .8em;
+				width:200px; margin-left: 180px; margin-top: 10px; }
+			.card.card-start, .card.card-end { width: 500px; margin-left:00px;}
+			.card.card-start { border-bottom: 0; }
+			.card.card-end { border-top: 0; }
+			.card.card-ref{ width: 350px; margin-left:100px; }
+			.card.card-ref { font-size: .8em; text-align: justify; }
+			.card.card-ref { border-right: 0; }
+			.card.card-px img{
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: optimize-contrast;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor;
+			}
+			.card.card-px {
+				text-align: center;
+			}
+
+			.card.card-wr, .card.card-wr pre{
+				font-size: 1em;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.card.card-wr pre{
+				margin: 0;
+				white-space: pre-wrap;
+				line-height: 1.25em;
+				text-align: justify;
+			}
+			.card.card-wr h3{
+				margin: 0; margin-bottom: 10px; text-align: center;
+				font-family:'Times New Roman', Times, serif;
+			}
+			.card.card-wr span.inlineh3{
+				font-family:'Times New Roman', Times, serif;
+				font-weight: bold;
+			}
+
+
+		</style>
+	</head>
+	<body>
+
+<div class="column-of-cards"> <!-- FIRST COLUMN -->
+
+	<div class="card card-wr">
+	<span class="inlineh3">A</span>
+	Conveying complex multilayered design space is not easy, but is necessary in certain contexts, i.e. Some projects contain complex multilayered design space.
+	<span class="inlineh3">B</span>
+	Separate a complex design into independent parts. Create an organizing logic which allows for relatedness without clutter.
+</div>
+
+</div> <!-- end FIRST COLUMN -->
+
+<div class="column-of-cards"> <!-- SECOND COLUMN -->
+
+		<div class="card card-start card-wr">
+		<h3>A</h3>
+<pre>Conveying complex multilayered design space is not easy, but is necessary in certain contexts, i.e. Some projects contain complex multilayered design space.</pre>
+</div>
+
+		<div class="card card-px">
+<img src="sketch001.png" width=400 />
+</div>
+
+		<div class="card card-wr">
+<pre>Display the same data in many different ways. I will call each a "view". The goal of the collection of all views is to understand the central "whole" in question, not to lead the viewer in circles.
+	
+Each "view" has a different purpose to this end.
+
+The left view ("context") presents the start & end (or introduction & conclusion, or problem & solution) and focuses on back-links giving greater context to why this whole has a purpose. Why was it created? Why might you be here in the first place, now?
+
+The central view ("1 whole") has a linear flow connecting the start to the end. How does the start connect to the end? How is this the solution to the problem? How does the conclusion resolve the introduction? And, what is introduction?
+
+The right view ("parts") links to supplementary wholes, especially those given purpose from the perspective of the present one. A major purpose of this view is to give the present whole its identity, encapsulating detail into their own parts when possible.</pre>
+</div>
+
+		<div class="card card-ref">
+context-problem-solution framing taken from The Timeless Way of Building (1979) (Alexander, Christopher)
+</div>
+
+		<div class="card card-wr">
+<pre>The purpose of connectedness is to benefit those things that have been connected. Do not create incidental connections. Remember the uselessness of lines in the complete graph.</pre>
+</div>
+
+		<div class="card card-ref">
+(?) TODO: Perhaps explore a way to create ephemeral connections, ghosts or hints of connections unrealized...
+</div>
+
+		<div class="card card-ref">
+(?) TODO: Perhaps an automatic tool or reminder about some maximum number of connections, suggesting that some connections might be less important, lower quality, or that the topic might be too large. PROPOSE SOLUTIONS: Remove unimportant connections, find a higher quality or denser connection that can replace multiple smaller connections, break up the current topic into parts.
+</div>
+
+		<div class="card card-wr">
+<pre>(!) This solution is a work in progress.</pre>
+<div class="comment">Not useful, remove?</div>
+<div class="comment">(Just another comment for testing multi-comment formatting. This one can be ignored.)</div>
+</div>
+
+		<div class="card card-end card-wr">
+<h3>B</h3>
+<pre>Separate a complex design into independent parts. Create an organizing logic which allows for relatedness without clutter.</pre>
+</div>
+
+</div> <!-- end SECOND COLUMN -->
+
+	</body>
+</html>
