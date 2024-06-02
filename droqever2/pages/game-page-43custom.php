@@ -167,6 +167,12 @@ body {
 				canvasEl.height = sh;
 			}
 		</script>
+		<div id="countdown">game expires in . . . <span id="countdown_ts"></span></div>
+		<?php 
+		if (isset($gamesourcelink))  {
+			echo "<a href='$gamesourcelink'>source code</a>";
+		}
+		?>
 	</body>
 	<script>
 		function getRandomColor() {
@@ -179,6 +185,27 @@ body {
 			return color;
 		}
 		document.getElementById("status-progress").style.accentColor = getRandomColor();
+	</script>
+	<script>
+		var distance = <?php echo $lifetime_remaining; ?>;
+		// count down 1 every second . . .
+		var x = setInterval(function() {
+			distance -= 1;
+			var days = Math.floor(distance / (60 * 60 * 24));
+			var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.floor((distance % (60 * 60)) / (60));
+			var seconds = Math.floor((distance % (60)) / 1);
+			if (days > 7) { document.getElementById("countdown_ts").innerText = `over a week`; }
+			else if (days > 1) { document.getElementById("countdown_ts").innerText = `a few days`; }
+			else if (days == 1) { document.getElementById("countdown_ts").innerText = `a day or two`; }
+			else if (hours > 1) { document.getElementById("countdown_ts").innerText = `${hours} hours`; }
+			else if (hours == 1 || minutes > 35) { document.getElementById("countdown_ts").innerText = `an hour or two`; }
+			else if (minutes > 20) { document.getElementById("countdown_ts").innerText = `half an hour`; }
+			else if (minutes > 1) { document.getElementById("countdown_ts").innerText = `${minutes} minutes`; }
+			else if (minutes == 1) { document.getElementById("countdown_ts").innerText = `a minute or two`; }
+			else if (seconds > 10) { document.getElementById("countdown_ts").innerText = `under a minute`; }
+			else { document.getElementById("countdown_ts").innerText = `a handful of seconds`; }
+		}, 1000);
 	</script>
 </html>
 

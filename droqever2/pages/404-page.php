@@ -10,10 +10,14 @@
 		</style>
 	</head>
 	<body>
-		<div style="position:absolute; left:50%; top:50%; width:400px; text-align:center; height: 2em; margin-left:-200px; margin-top: -1em;">
-			404 droqever not found
+		<div style="position:absolute; left:50%; top:25%; width:400px; text-align:center; height: 2em; margin-left:-200px;">
+			hello & welcome to droqever.com
 			<br/>
-			new version pending . . .
+			new games come and go but this is not a site for navigating
+			<br/>
+			im droqen. follow me in internet places (links to places)
+			<br/>
+			sometimes i'll post there.
 		</div>
 		<script>
 			function getRandomColor() {
