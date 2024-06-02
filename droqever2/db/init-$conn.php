@@ -1,5 +1,4 @@
 <?php
-	echo "<p>require - initconn</p>";
 	require_once __DIR__ . '/.dbcredentials.php';
 	$dsn = "mysql:host=$dbhost;dbname=$dbname";
 	$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
