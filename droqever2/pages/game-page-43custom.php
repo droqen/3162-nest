@@ -115,10 +115,10 @@ body {
 		</div>
 
 		<script src="/engine_43custom/godot.js?d=2&v=1"></script>
-		<script src="/engine_43custom/cat.js?d=2&v=1" defer></script>
+		<script src="/engine_43custom/cat.js?d=2&v=2" defer></script>
 		<script defer>
 			setTimeout(()=>{
-				Cat.boot('games_43custom/void.zip',0);
+				Cat.boot('/games_43custom/void.zip',0);
 			},100);
 		</script>
 		<script>
