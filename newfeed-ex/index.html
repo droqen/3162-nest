@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>
+			newfeed.droqen.com
+		</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+		<style>
+			html, body {
+				background: #efdeff;
+			}
+			body, pre, textarea {
+				font-family: "Averia Serif Libre", serif;
+				font-weight: 400;
+				font-style: normal;
+				margin: 0;
+			}
+			pre {
+				white-space: pre-wrap; text-align: justify;
+			}
+			div.card {
+				background-color: #ffffff;
+				padding: 10px;
+				width: 400px;
+				margin: 10px;
+				border-bottom-right-radius: 2em;
+			}
+			div.hidden.card {
+				text-align: center;
+				opacity: 0.5;
+				filter:blur(1px);
+			}
+			div.card form input, div.card form textarea {
+				width: 400px;
+				accent-color: black;
+			}
+			div.card form textarea {
+				width: 373px;
+				resize: none;
+				background-color: rgba(0,0,0,0.05);
+				border: 0;
+				outline: none;
+				overflow: hidden;
+				padding-left: 1em;
+				padding-right: 1em;
+				padding-top: 1em;
+				text-align: justify;
+				border-bottom-right-radius: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='card'><pre><a href="https://www.droqen.com/">⚪</a> forces of nature 🌙</pre></div>
+		<div class='card'><pre>⚪ nonlinear adventure game,
+with thoughts of death and destruction
+exploring...</pre></div>
+<div class='hidden card'>⬤<br/><em>hidden due to weather</em></div>
+<div class='card'><pre>1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.</pre></div>
+<div class='hidden card'>⬤<br/><em>hidden due to weather</em></div>
+<div class='hidden card'>⬤<br/><em>hidden due to weather</em></div>
+<div class='hidden card'>⬤<br/><em>hidden due to weather</em></div>
+<div class='card'>
+	<form>
+		<textarea name="text" spellcheck="false" placeholder="Get your thoughts out here..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+		<br/>
+		<input type="range" id="darkness" name="darkness" min="0" max="100" value="0" />
+	</form>
+</div>
+<div class='card'><pre>There is a thoughtspace here. Zero, one, two, and three are the numbers that comprise a universe. No meaning in this text, it is here to test the wrapping of whitespace in a void with no notion of life. There is no life here.</pre></div>
+
+
+	</body>
+</html>
