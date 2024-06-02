@@ -1,0 +1,228 @@
+
+html { min-height: 100%; overflow: hidden; }
+
+body {
+	/* touch-action: none; */
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	text-align: center;
+	background-color: black;
+}
+
+p, div#gamelist {
+	font-family: "Josefin Sans", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	color: white;
+	font-size: smaller;
+	text-align: left;
+}
+
+div#gamelist, div#gamelist div.week {
+	font-size: 0;
+}
+div#gamelist div.month-label {
+	font-size: 10px;
+}
+
+div#gamelist img {
+	image-rendering: pixelated;
+}
+
+div#gamelist div.week .day {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 0 2px 2px 0;
+	background-color: #333;
+	border-radius: 10px;
+	position: relative;
+}
+div#gamelist div.week .futur.day {
+	background: none;
+	width: 18px;
+	height: 18px;
+	border: 1px #333 solid;
+}
+div#gamelist div.week .no.day {
+	background: none;
+}
+div#gamelist div.week .working.day {
+	animation: pulsar 1s infinite alternate ease-in-out;
+	/* animation: wheelabout 2s infinite linear; transform-origin: bottom; */
+}
+@keyframes pulsar {
+	0%,50% {
+		border-radius: 0;
+	}
+  
+	100% {
+		border-radius: 10px;
+	}
+}
+@keyframes wheelabout {
+	0% {
+		transform: scale(0.50) translateY(-20px) rotate(000deg);
+	}
+	50% {
+		transform: scale(0.50) translateY(-20px) rotate(180deg);
+	}
+	100% {
+		transform: scale(0.50) translateY(-20px) rotate(360deg);
+	}
+}
+div#gamelist div.week .link-day img {
+	width: 20px;
+	height: 20px;
+	margin: 0 2px 2px 0;
+}
+div#gamelist div.week .link-day div.hovname {
+	display:none;
+	position:absolute; left:-5px; bottom:20px;
+	font-size:10px;
+	z-index:1;
+	background-color: #000;
+	pointer-events: none;
+	white-space: nowrap;
+	/* padding:5px; */
+	/* border-radius:20px; */
+}
+div#gamelist div.week .link-day:hover div.hovname {
+	display:block;
+}
+
+a {
+	color: #fff;
+	font-weight: 600;
+}
+a:visited {
+	color: #aaa;
+}
+a:hover {
+	color: #f0f;
+}
+
+#canvas {
+	display: block;
+	margin: 0;
+	color: white;
+	cursor: pointer;
+	transition: transform 0.25s ease;
+}
+
+#canvas:focus, #canvas.never_unfocus {
+	outline: none;
+	cursor: default;
+	transform: none;
+}
+
+.godot {
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	color: #e0e0e0;
+	background-color: #3b3943;
+	background-image: linear-gradient(to bottom, #403e48, #35333c);
+	border: 1px solid #45434e;
+	box-shadow: 0 0 1px 1px #2f2d35;
+}
+
+
+/* Status display
+ * ============== */
+
+#status {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* don't consume click events - make children visible explicitly */
+	visibility: hidden;
+}
+
+#status-progress {
+	width: 366px;
+	height: 7px;
+	background-color: #38363A;
+	border: 1px solid #444246;
+	padding: 1px;
+	box-shadow: 0 0 2px 1px #1B1C22;
+	border-radius: 2px;
+	visibility: visible;
+}
+
+@media only screen and (orientation:portrait) {
+	#status-progress {
+		width: 61.8%;
+	}
+}
+
+#status-progress-inner {
+	height: 100%;
+	width: 0;
+	box-sizing: border-box;
+	transition: width 0.5s linear;
+	background-color: #202020;
+	border: 1px solid #222223;
+	box-shadow: 0 0 1px 1px #27282E;
+	border-radius: 3px;
+}
+
+#status-indeterminate {
+	height: 42px;
+	visibility: visible;
+	position: relative;
+}
+
+#status-indeterminate>div {
+	width: 4.5px;
+	height: 0;
+	border-style: solid;
+	border-width: 9px 3px 0 3px;
+	border-color: #2b2b2b transparent transparent transparent;
+	transform-origin: center 21px;
+	position: absolute;
+}
+
+#status-indeterminate>div:nth-child(1) {
+	transform: rotate(22.5deg);
+}
+
+#status-indeterminate>div:nth-child(2) {
+	transform: rotate(67.5deg);
+}
+
+#status-indeterminate>div:nth-child(3) {
+	transform: rotate(112.5deg);
+}
+
+#status-indeterminate>div:nth-child(4) {
+	transform: rotate(157.5deg);
+}
+
+#status-indeterminate>div:nth-child(5) {
+	transform: rotate(202.5deg);
+}
+
+#status-indeterminate>div:nth-child(6) {
+	transform: rotate(247.5deg);
+}
+
+#status-indeterminate>div:nth-child(7) {
+	transform: rotate(292.5deg);
+}
+
+#status-indeterminate>div:nth-child(8) {
+	transform: rotate(337.5deg);
+}
+
+#status-notice {
+	margin: 0 100px;
+	line-height: 1.3;
+	visibility: visible;
+	padding: 4px 6px;
+	visibility: visible;
+}

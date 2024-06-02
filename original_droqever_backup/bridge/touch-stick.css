@@ -1,0 +1,99 @@
+/* canvas#canvas, #touch_stick_wrapper, #touch_stick_button {
+	z-index: 1;
+} */
+
+@media only screen and ((max-device-width: 480px) or (max-device-height: 480px)) {
+	html,body{
+		overflow: hidden; 
+	/* need this on ios */
+	}
+}
+
+#touch_stick_wrapper, .joystick, #touch_button_wrapper, .joybutton, .joyghost {
+	pointer-events: none;
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+
+.joystick, .joystick .joyghost, .joybutton, .joybutton .joyghost {
+	border-radius: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+#touch_stick_wrapper, .joystick {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+#touch_stick_wrapper {
+	position: absolute;
+	border: 1px solid #eef;
+	width: 26vmin; margin-left: -13vmin;
+	height: 26vmin; margin-top: -13vmin;
+	opacity: 0.0;
+	transition: opacity 0.25s linear;
+}
+#touch_stick_wrapper.active {
+	opacity: 1.0;
+	transition: opacity 0.25s linear;
+}
+
+.joystick {
+	background-color: blue;
+}
+
+.joystick .joyghost {
+	border: 1px solid blue;
+	z-index: 5;
+}
+
+.joyghost {
+	position: absolute;
+}
+
+
+#touch_button_wrapper, .joybutton {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+#touch_button_wrapper {
+	position: absolute;
+	border: none;/*1px solid #fff;*/
+	width: 22vmin; margin-left: -11vmin;
+	height: 22vmin; margin-top: -11vmin;
+	opacity: 0.0;
+	transition: opacity 0.25s linear;
+}
+#touch_button_wrapper.active {
+	opacity: 1.0;
+	transition: opacity 0.05s linear;
+}
+
+.joybutton {
+	background-color: pink;
+}
+
+.joybutton .joyghost {
+	border: 1px solid pink;
+	z-index: 5;
+}
+
+.joybutton, .joybutton .joyghost {
+	transform: scale(0.5); /* button disengaged */
+	transition: transform 0.25s linear;
+}
+
+#touch_button_wrapper.active .joybutton, 
+#touch_button_wrapper.active .joybutton .joyghost {
+	transform: scale(1.0); /* button engaged */
+	transition: transform 0.05s linear;
+}
