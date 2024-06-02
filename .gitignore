@@ -1,2 +1,3 @@
-*.dbcredentials.php
+*credentials.php
+*whitelist.php
 clone_*/*
