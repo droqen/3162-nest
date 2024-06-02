@@ -22,10 +22,14 @@ body {
 
 #canvas {
 	display: block;
+	filter: blur(0.33vmin);
+	transition: filter 2.33s ease-in;
 }
 
 #canvas:focus {
 	outline: none;
+	filter: none;
+	transition: filter .15s linear;
 }
 
 #status, #status-splash, #status-progress {
@@ -109,16 +113,16 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" src="/engine_43custom/splash.png" alt="">
+			<!-- <img id="status-splash" src="/engine_43custom/splash.png" alt=""> -->
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="/engine_43custom/godot.js?d=2&v=1"></script>
+		<script src="/engine_43custom/godot.js?d=2&v=2"></script>
 		<script src="/engine_43custom/cat.js?d=2&v=2" defer></script>
 		<script defer>
 			setTimeout(()=>{
-				Cat.boot('/games_43custom/void.zip',0);
+				Cat.boot("<?php echo $gamezippath; ?>", <?php echo $gamezipsize; ?>);
 			},100);
 		</script>
 		<script>
@@ -164,5 +168,17 @@ body {
 			}
 		</script>
 	</body>
+	<script>
+		function getRandomColor() {
+			var letters = 'ABCDEF'; // '0123456789ABCDEF';
+			var numletters = 6; // 16
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * numletters)];
+			}
+			return color;
+		}
+		document.getElementById("status-progress").style.accentColor = getRandomColor();
+	</script>
 </html>
 
