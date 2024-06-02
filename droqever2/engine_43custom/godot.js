@@ -10456,7 +10456,7 @@ function dbg(...args) {
   	}
 
   function _godot_js_display_window_title_set(p_data) {
-  		document.title = GodotRuntime.parseString(p_data);
+  		// document.title = GodotRuntime.parseString(p_data); // don't do this
   	}
 
   function _godot_js_eval(p_js, p_use_global_ctx, p_union_ptr, p_byte_arr, p_byte_arr_write, p_callback) {
