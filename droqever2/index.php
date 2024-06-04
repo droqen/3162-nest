@@ -30,7 +30,7 @@ if (isset($_GET['url'])) {
 				if (file_exists(__DIR__ . $gamezippath)) {
 					$gamezipsize = filesize(__DIR__ . $gamezippath);
 				} else {
-					die("Missing file for posttype $posttype zipname $zipname");
+					die("Missing file at $gamezippath for posttype $posttype zipname $gamezipname");
 				}
 				break;
 			}
