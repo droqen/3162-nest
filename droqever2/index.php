@@ -5,6 +5,7 @@ $access_granted = false;
 if (isset($_GET['url'])) {
 	require_once __DIR__ . '/db/init-$conn.php';
 	$searchname = str_replace("-/","",$_GET['url']);
+	$gametitle = $searchname; // change this later
 	$res = $conn->query("SELECT postid, posttype, NOW(), postexpires FROM posts WHERE name = '$searchname' AND (postexpires = null OR NOW() < postexpires) ORDER BY postdate DESC, postid DESC");
 	foreach ($res as $row) {
 		$postid = $row[0];
@@ -42,5 +43,5 @@ if (isset($_GET['url'])) {
 if ($access_granted && isset($gamezipsize)) {
 	require_once __DIR__ . '/pages/game-page-43custom.php';
 } else {
-	require_once __DIR__ . '/pages/404-page.php';
+	require_once __DIR__ . '/pages/404-page.html';
 }

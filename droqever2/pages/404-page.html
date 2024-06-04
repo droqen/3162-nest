@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>droqever</title>
+		<style>
+			body {
+				transition: background-color 9s ease-in-out;
+				background-color: #ffffff;
+			}
+			div#message {
+				position:absolute;
+				left:50vw; top:20vh;
+				width:60vw; margin-left:-30vw;
+				text-align:justify;
+				min-width:400px;
+				max-width:640px;
+			}
+			.pecita {
+				font-family: Pecita; src: url('Pecita.otf');
+				font-size: 2em;
+			}
+			.notpecita {
+				font-family: monospace;
+				font-size: 1em
+			}
+			div#message a {
+				text-decoration: underline;
+				color: black;
+			}
+			div#message a:hover {
+				text-decoration: none;
+				background-color: black;
+				color: white;
+				cursor: crosshair;
+			}
+			div.section {
+				margin-bottom: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="message">
+			<div class="section" id="section1">
+				<div class="pecita">nothing lasts forever.</div>
+				<div class="notpecita">nothing lasts forever.</div>
+			</div>
+			<div class="section" id="section2">
+				<div class="pecita">you are on “droqever.com,” maybe looking for a game? well . . . sometimes these links expire. dat's life.</div>
+				<div class="notpecita">you are on “droqever.com,” maybe looking for a game? well . . . sometimes these links expire. dat's life.</div>
+			</div>
+			<div class="section" id="section3">
+				<div class="pecita">want more games?<br/>lookit
+					<a href='https://droqen.itch.io/'>droqen.itch.io</a> or maybe follow me on like,
+					<a href='https://twitter.com/droqen'>twitter</a>, or
+					<a href='https://mastodon.social/@droqen'>mastodon</a>, or
+					<a href='https://cohost.org/droqen'>cohost</a>, or
+					<a href='https://www.instagram.com/droqen2'>instagram</a>, or
+					<a href='https://bsky.app/profile/droqen.bsky.social'>bluesky</a>, or one o' those other fuckin' websites.</div>
+				<div class="notpecita">want more games?<br/>lookit
+					<a href='https://droqen.itch.io/'>droqen.itch.io</a> or maybe follow me on like,
+					<a href='https://twitter.com/droqen'>twitter</a>, or
+					<a href='https://mastodon.social/@droqen'>mastodon</a>, or
+					<a href='https://cohost.org/droqen'>cohost</a>, or
+					<a href='https://www.instagram.com/droqen2'>instagram</a>, or
+					<a href='https://bsky.app/profile/droqen.bsky.social'>bluesky</a>, or one o' those other . . . websites.</div>
+			</div>
+			<div class="section" id="section4">
+				<div class="pecita">~love, droqen.</div>
+				<!-- <div class="notpecita">~love, droqen.</div> -->
+			</div>
+		</div>
+		<script>
+			function getRandomColor() {
+				var letters = 'ABCDEF'; // '0123456789ABCDEF';
+				var numletters = 6; // 16
+				var color = '#';
+				for (var i = 0; i < 6; i++) {
+					color += letters[Math.floor(Math.random() * numletters)];
+				}
+				return color;
+			}
+			document.body.style.backgroundColor = getRandomColor();
+			setTimeout(() => {
+				document.body.style.backgroundColor = getRandomColor();
+				setInterval(() => {
+					document.body.style.backgroundColor = getRandomColor();
+				}, 10000);
+			}, 1);
+			
+			[
+				["section2",1500],
+				["section3",5500],
+				["section4",8000],
+			].forEach((sectionArray) => {
+				var section = document.getElementById(sectionArray[0]);
+				section.style.opacity = 0;
+				section.style.pointerEvents = 'none';
+				setTimeout(() => {
+					section.style.transition = 'opacity 1s ease';
+					section.style.opacity = 1;
+					section.style.pointerEvents = '';
+				}, sectionArray[1]);
+			});
+		</script>
+	</body>
+</html>
