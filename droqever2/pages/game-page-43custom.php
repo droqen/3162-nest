@@ -14,10 +14,16 @@ html, body, #canvas {
 }
 
 body {
-	color: white;
-	background-color: black;
+	color: black;
 	overflow: hidden;
-	touch-action: none;
+	/* touch-action: none; */
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: 1em;
+	line-height: .8em;
+}
+body {
+	transition: background-color 9s ease-in-out;
+	background-color: #ffffff;
 }
 
 #canvas {
@@ -44,7 +50,7 @@ body {
 }
 
 #status {
-	background-color: black;
+	/* background-color: black; */ /* dont hide the rest of the page! */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -98,6 +104,24 @@ body {
 	border-image-width: 0;
 	outline: none;
 }
+
+#countdown {
+	position: absolute; top:.5em; left:.5em;
+}
+#countdown #countdown_ts {
+	opacity: 0; transition: opacity 1s ease;
+}
+#gamesourcelink {
+	position: absolute; right:.5em; bottom:.5em;
+}
+
+a {
+	color: black; text-decoration: underline;
+}
+a:hover {
+	color:white; background-color: black;text-decoration: none;
+}
+
 		</style>
 		<!-- <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/> -->
@@ -167,10 +191,10 @@ body {
 				canvasEl.height = sh;
 			}
 		</script>
-		<div id="countdown">game expires in . . . <span id="countdown_ts"></span></div>
+		<div id="countdown">nothing lasts forever . . . <span id="countdown_ts"></span></div>
 		<?php 
 		if (isset($gamesourcelink))  {
-			echo "<a href='$gamesourcelink'>source code</a>";
+			echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
 		}
 		?>
 	</body>
@@ -184,28 +208,46 @@ body {
 			}
 			return color;
 		}
+		document.body.style.backgroundColor = getRandomColor();
+		setTimeout(() => {
+			document.body.style.backgroundColor = getRandomColor();
+			setInterval(() => {
+				document.body.style.backgroundColor = getRandomColor();
+			}, 10000);
+		}, 1);
+	</script>
+	<script>
 		document.getElementById("status-progress").style.accentColor = getRandomColor();
 	</script>
 	<script>
 		var distance = <?php echo $lifetime_remaining; ?>;
-		// count down 1 every second . . .
+		// count down every 5 seconds
 		var x = setInterval(function() {
-			distance -= 1;
+			distance -= 5;
 			var days = Math.floor(distance / (60 * 60 * 24));
 			var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
 			var minutes = Math.floor((distance % (60 * 60)) / (60));
 			var seconds = Math.floor((distance % (60)) / 1);
-			if (days > 7) { document.getElementById("countdown_ts").innerText = `over a week`; }
-			else if (days > 1) { document.getElementById("countdown_ts").innerText = `a few days`; }
-			else if (days == 1) { document.getElementById("countdown_ts").innerText = `a day or two`; }
-			else if (hours > 1) { document.getElementById("countdown_ts").innerText = `${hours} hours`; }
-			else if (hours == 1 || minutes > 35) { document.getElementById("countdown_ts").innerText = `an hour or two`; }
-			else if (minutes > 20) { document.getElementById("countdown_ts").innerText = `half an hour`; }
-			else if (minutes > 1) { document.getElementById("countdown_ts").innerText = `${minutes} minutes`; }
-			else if (minutes == 1) { document.getElementById("countdown_ts").innerText = `a minute or two`; }
-			else if (seconds > 10) { document.getElementById("countdown_ts").innerText = `under a minute`; }
-			else { document.getElementById("countdown_ts").innerText = `a handful of seconds`; }
-		}, 1000);
+			document.getElementById("countdown_ts").style.opacity = 1;
+			if (days > 7) { document.getElementById("countdown_ts").innerText = `this game isn't going anywhere too soon`; }
+			else if (days > 3) { document.getElementById("countdown_ts").innerText = `this game will stick around for several days`; }
+			else if (days > 1) { document.getElementById("countdown_ts").innerText = `this game will stick around for a few days`; }
+			else if (days == 1) { document.getElementById("countdown_ts").innerText = `this game will be here for another day or two`; }
+			else if (hours > 1) { document.getElementById("countdown_ts").innerText = `this game has ${hours} hours remaining`; }
+			else if (hours == 1 || minutes > 35) { document.getElementById("countdown_ts").innerText = `this game has an hour or two left`; }
+			else if (minutes > 20) { document.getElementById("countdown_ts").innerText = `this game disappears in half an hour`; }
+			else if (minutes > 1) { document.getElementById("countdown_ts").innerText = `this game disappears in ${minutes} minutes`; }
+			else if (minutes == 1) { document.getElementById("countdown_ts").innerText = `this game disappears in a minute or two`; }
+			else if (seconds > 10) { document.getElementById("countdown_ts").innerText = `this game disappears in under a minute`; }
+			else if (seconds > 0) { document.getElementById("countdown_ts").innerText = `this game disappears in a handful of seconds`; }
+			else {
+				document.getElementById("countdown_ts").innerText = `this game link has expired`;
+				document.getElementById("canvas").style.transition = "opacity 60s ease";
+				document.getElementById("canvas").style.opacity = "0";
+				clearInterval(x);
+				setTimeout(function(){window.location.reload();}, 60000); // reload page in 60 seconds. once it has completely vanished...
+			}
+		}, 5000);
 	</script>
 </html>
 
