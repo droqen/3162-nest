@@ -5,9 +5,7 @@ if (isset($_SESSION['username']) && $_SESSION['username'] == 'droqen') {
 	require_once(__DIR__ . '/404-page.html');
 	die();
 }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -19,6 +17,7 @@ if (isset($_SESSION['username']) && $_SESSION['username'] == 'droqen') {
 	</head>
 	<body>
 
+	<div style='padding:2em; line-height: normal;'>
 <?php
 	if (isset($_POST['postname'])) {
 		require_once __DIR__ . '/../db/post-editform.php';
@@ -28,6 +27,7 @@ if (isset($_SESSION['username']) && $_SESSION['username'] == 'droqen') {
 		require_once __DIR__ . '/../db/echo-activegames.php';
 	}
 ?>
+	</div>
 
 	</body>
 	<script src="/scripts/cycling_pastel_bg.js"></script>
