@@ -72,7 +72,7 @@
 				canvasEl.height = sh;
 			}
 		</script>
-		<div id="countdown">nothing lasts forever . . . <span id="countdown_ts"></span></div>
+		<div id="countdown"><span id="countdown_ts"></span></div>
 		<?php 
 		if (isset($gamesourcelink))  {
 			echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
@@ -84,32 +84,31 @@
 	<script>
 		var distance = <?php echo $lifetime_remaining; ?>;
 		// count down every 5 seconds
-		var x = setInterval(function() {
-			distance -= 5;
-			var days = Math.floor(distance / (60 * 60 * 24));
-			var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
-			var minutes = Math.floor((distance % (60 * 60)) / (60));
-			var seconds = Math.floor((distance % (60)) / 1);
-			document.getElementById("countdown_ts").style.opacity = 1;
-			if (days > 7) { document.getElementById("countdown_ts").innerText = `this game isn't going anywhere too soon`; }
-			else if (days > 3) { document.getElementById("countdown_ts").innerText = `this game will stick around for several days`; }
-			else if (days > 1) { document.getElementById("countdown_ts").innerText = `this game will stick around for a few days`; }
-			else if (days == 1) { document.getElementById("countdown_ts").innerText = `this game will be here for another day or two`; }
-			else if (hours > 1) { document.getElementById("countdown_ts").innerText = `this game has ${hours} hours remaining`; }
-			else if (hours == 1 || minutes > 35) { document.getElementById("countdown_ts").innerText = `this game has an hour or two left`; }
-			else if (minutes > 20) { document.getElementById("countdown_ts").innerText = `this game disappears in half an hour`; }
-			else if (minutes > 1) { document.getElementById("countdown_ts").innerText = `this game disappears in ${minutes} minutes`; }
-			else if (minutes == 1) { document.getElementById("countdown_ts").innerText = `this game disappears in a minute or two`; }
-			else if (seconds > 10) { document.getElementById("countdown_ts").innerText = `this game disappears in under a minute`; }
-			else if (seconds > 0) { document.getElementById("countdown_ts").innerText = `this game disappears in a handful of seconds`; }
+		function updateCountdown() {
+			var days = Math.round(distance / (60 * 60 * 24));
+			var hours = Math.round((distance % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.round((distance % (60 * 60)) / (60));
+			var seconds = Math.round((distance % (60)) / 1);
+			if (days > 0) { document.getElementById("countdown_ts").innerText = `game disappears in ${days} day${days==1?'':'s'}`; }
+			else if (hours > 0) { document.getElementById("countdown_ts").innerText = `game disappears in ${hours} hour${hours==1?'':'s'}`; }
+			else if (minutes > 0) { document.getElementById("countdown_ts").innerText = `game disappears in ${minutes} minute${minutes==1?'':'s'}`; }
+			else if (seconds > 0) { document.getElementById("countdown_ts").innerText = `game disappears in ${seconds} second${seconds==1?'':'s'}`; }
 			else {
-				document.getElementById("countdown_ts").innerText = `this game link has expired`;
+				document.getElementById("countdown_ts").innerText = `this game link has expired. byeee <3`;
 				document.getElementById("canvas").style.transition = "opacity 60s ease";
 				document.getElementById("canvas").style.opacity = "0";
 				clearInterval(x);
 				setTimeout(function(){window.location.reload();}, 60000); // reload page in 60 seconds. once it has completely vanished...
 			}
+		}
+		var x = setInterval(function() {
+			distance -= 5;
+			updateCountdown();
 		}, 5000);
+		setTimeout(function() {
+			updateCountdown(); // do it asap
+			document.getElementById("countdown_ts").style.opacity = 1;
+		}, 50);
 	</script>
 </html>
 

@@ -10,56 +10,28 @@
 	</head>
 	<body>
 		<div id="message">
-			<div class="section" id="section1">
-				<div class="pecita">nothing lasts forever.</div>
-				<div class="notpecita">nothing lasts forever.</div>
-			</div>
-			<div class="section" id="section2">
-				<div class="pecita">you are on “droqever.com,” maybe looking for a game? well . . . sometimes these links expire. dat's life.</div>
-				<div class="notpecita">you are on “droqever.com,” maybe looking for a game? well . . . sometimes these links expire. dat's life.</div>
-			</div>
-			<div class="section" id="section3">
-				<div class="pecita">want more games?<br/>lookit
-					<a href='https://droqen.itch.io/'>droqen.itch.io</a> or maybe follow me on like,
-					<a href='https://twitter.com/droqen'>twitter</a>, or
-					<a href='https://mastodon.social/@droqen'>mastodon</a>, or
-					<a href='https://cohost.org/droqen'>cohost</a>, or
-					<a href='https://www.instagram.com/droqen2'>instagram</a>, or
-					<a href='https://bsky.app/profile/droqen.bsky.social'>bluesky</a>, or any number of other places on the internet . . .</div>
-				<div class="notpecita">want more games?<br/>lookit
-					<a href='https://droqen.itch.io/'>droqen.itch.io</a> or maybe follow me on like,
-					<a href='https://twitter.com/droqen'>twitter</a>, or
-					<a href='https://mastodon.social/@droqen'>mastodon</a>, or
-					<a href='https://cohost.org/droqen'>cohost</a>, or
-					<a href='https://www.instagram.com/droqen2'>instagram</a>, or
-					<a href='https://bsky.app/profile/droqen.bsky.social'>bluesky</a>, or any number of other places on the internet . . .</div>
-			</div>
-			<div class="section" id="section4">
-				<div class="pecita">~love, droqen.</div>
-				<!-- <div class="notpecita">~love, droqen.</div> -->
-			</div>
-			
+			i don't like having my games up forever, so i made them expire after some random # of days!
+			i'll post another game somewhere on the internet soon and it will be better! find me<br/>
+			-droqen<br/>
+			<ul class="pecita" id="alllinks" style="font-size: 1.5em; text-align: left;">
+				<div style='display:inline-block; width:180px;'><a href='https://droqen.itch.io/'>itchio</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://twitter.com/droqen'>twitter</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://mastodon.social/@droqen'>mastodon</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://cohost.org/droqen'>cohost</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://www.instagram.com/droqen2'>instagram</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://bsky.app/profile/droqen.bsky.social'>bluesky</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://kinopio.club/droqen-entrance-c6rgUnlHCH8386yogunZ-'>kinopio</a></div>
+				<div style='display:inline-block; width:180px;'><a href='https://store.steampowered.com/developer/droqen'>steam</a></div>
+			</ul>
+			p.s. this font is <a href='https://pecita.eu/' style="font-family: Pecita;">Pecita</a> isn't it just the best? <3
 		</div>
-
 		<div id="imdroqen"><a href='/droqen.php'>i'm droqen!</a></div>
-
 		<script src="/scripts/cycling_pastel_bg.js"></script>
-		<script>	
-			[
-				["section2",1500],
-				["section3",5500],
-				["section4",8000],
-			].forEach((sectionArray) => {
-				var section = document.getElementById(sectionArray[0]);
-				section.style.opacity = 0;
-				section.style.pointerEvents = 'none';
-				setTimeout(() => {
-					section.style.transition = 'opacity 1s ease';
-					section.style.opacity = 1;
-					section.style.pointerEvents = '';
-				}, sectionArray[1]);
-			});
+		<script>
+			var el = document.getElementById('alllinks');
+			for (var i = el.children.length; i >= 0; i--) {
+				el.appendChild(el.children[Math.random() * i | 0]);
+			}
 		</script>
-
 	</body>
 </html>
