@@ -5,127 +5,8 @@
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<link rel="stylesheet" href="/scripts/corestyle.css">
 		<title><?php echo $gametitle;?></title>
-		<style>
-html, body, #canvas {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-body {
-	color: black;
-	overflow: hidden;
-	/* touch-action: none; */
-	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-size: 1em;
-	line-height: .8em;
-}
-body {
-	transition: background-color 9s ease-in-out;
-	background-color: #ffffff;
-}
-
-#canvas {
-	display: block;
-	filter: blur(0.33vmin);
-	transition: filter 2.33s ease-in;
-}
-
-#canvas:focus {
-	outline: none;
-	filter: none;
-	transition: filter .15s linear;
-}
-
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
-#status {
-	/* background-color: black; */ /* dont hide the rest of the page! */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	visibility: hidden;
-}
-
-#status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-}
-
-#status-progress, #status-notice {
-	display: none;
-}
-
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
-}
-
-#status-notice {
-	background-color: #5b3943;
-	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
-	margin: 0 2rem;
-	overflow: hidden;
-	padding: 1rem;
-	text-align: center;
-	z-index: 1;
-}
-		</style>
-		<style>
-body {
-	min-height: 100vh;
-}
-#canvas {
-	/* pico-8 pixel perfect */
-	image-rendering: optimizeSpeed;
-	image-rendering: -moz-crisp-edges;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: optimize-contrast;
-	image-rendering: pixelated;
-	-ms-interpolation-mode: nearest-neighbor;
-	border: 0;
-	border-image-width: 0;
-	outline: none;
-}
-
-#countdown {
-	position: absolute; top:.5em; left:.5em;
-}
-#countdown #countdown_ts {
-	opacity: 0; transition: opacity 1s ease;
-}
-#gamesourcelink {
-	position: absolute; right:.5em; bottom:.5em;
-}
-
-a {
-	color: black; text-decoration: underline;
-}
-a:hover {
-	color:white; background-color: black;text-decoration: none;
-}
-
-		</style>
-		<!-- <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
-<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/> -->
-
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -197,28 +78,9 @@ a:hover {
 			echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
 		}
 		?>
+		<div id="imdroqen"><a href='/droqen.php'>i'm droqen!</a></div>
 	</body>
-	<script>
-		function getRandomColor() {
-			var letters = 'ABCDEF'; // '0123456789ABCDEF';
-			var numletters = 6; // 16
-			var color = '#';
-			for (var i = 0; i < 6; i++) {
-				color += letters[Math.floor(Math.random() * numletters)];
-			}
-			return color;
-		}
-		document.body.style.backgroundColor = getRandomColor();
-		setTimeout(() => {
-			document.body.style.backgroundColor = getRandomColor();
-			setInterval(() => {
-				document.body.style.backgroundColor = getRandomColor();
-			}, 10000);
-		}, 1);
-	</script>
-	<script>
-		document.getElementById("status-progress").style.accentColor = getRandomColor();
-	</script>
+	<script src="/scripts/cycling_pastel_bg.js"></script>
 	<script>
 		var distance = <?php echo $lifetime_remaining; ?>;
 		// count down every 5 seconds
