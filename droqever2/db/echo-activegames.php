@@ -10,7 +10,7 @@ $res = $conn->query("SELECT posts.postid, posts.name
 
 echo "<h1>active games</h1>";
 
-echo "[<a href='?show_add=new'>add new game</a>]<br/>";
+echo "[<a href='?show_add=new'>add new game</a>]<br/><br/>";
 
 foreach ($res as $row) {
 	$postid = $row[0];
