@@ -9,76 +9,87 @@
 		<title><?php echo $gametitle;?></title>
 	</head>
 	<body>
-		<canvas id="canvas">
-			Your browser does not support the canvas tag.
-		</canvas>
+		<div id="gamefp" class="fullpage">
+			<canvas id="canvas">
+				Your browser does not support the canvas tag.
+			</canvas>
 
-		<noscript>
-			Your browser does not support JavaScript.
-		</noscript>
+			<noscript>
+				Your browser does not support JavaScript.
+			</noscript>
 
-		<div id="status">
-			<!-- <img id="status-splash" src="/engine_43custom/splash.png" alt=""> -->
-			<progress id="status-progress"></progress>
-			<div id="status-notice"></div>
+			<div id="status">
+				<!-- <img id="status-splash" src="/engine_43custom/splash.png" alt=""> -->
+				<progress id="status-progress"></progress>
+				<div id="status-notice"></div>
+			</div>
+
+			<script src="/engine_43custom/godot.js?d=2&v=2"></script>
+			<script src="/engine_43custom/cat.js?d=2&v=2" defer></script>
+			<script defer>
+				setTimeout(()=>{
+					Cat.boot("<?php echo $gamezippath; ?>", <?php echo $gamezipsize; ?>);
+				},100);
+			</script>
+			<script>
+				const canvasEl = document.getElementById("canvas")
+				const canvasParent = canvasEl.parentElement;
+
+				function isArrayOrTypedArray(x) {
+					return Boolean(
+						x && (typeof x === 'object') && (Array.isArray(x) || (ArrayBuffer.isView(x) && !(x instanceof DataView)))
+					);
+				}
+
+				window.addEventListener('canvasGameLoaded', (_ev)=>{
+					console.log(`game loaded`);
+					resizeCanvas();
+				});
+
+				let gameWidth = 200;
+				let gameHeight = 200;
+
+				window.addEventListener('setGameSize', (size)=>{
+					gameWidth = Number(size['w']);
+					gameHeight = Number(size['h']);
+					console.log(`setGameSize(${gameWidth}, ${gameHeight})`);
+					resizeCanvas();
+				})
+				window.addEventListener('resize', (_ev)=>{ resizeCanvas(); }, true);
+
+				function resizeCanvas() {
+					let pw = canvasParent.clientWidth;	
+					let ph = canvasParent.clientHeight;
+					let bw = gameWidth;
+					let bh = gameHeight;
+					let scale = Math.floor(Math.min(pw/bw, ph/bh));
+					if (scale < 1) { scale = 1; }
+					let sw = bw * scale;
+					let sh = bh * scale;
+					canvasEl.style.position = "absolute";
+					canvasEl.style.left = `${Math.floor((pw-sw)/2)}px`;
+					canvasEl.style.top = `${Math.floor((ph-sh)/2)}px`;
+					canvasEl.width = sw;
+					canvasEl.height = sh;
+				}
+			</script>
+			<div id="countdown"><span id="countdown_ts"></span></div>
+			<?php 
+			if (isset($gamesourcelink))  {
+				echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
+			}
+			?>
+			<div id="imdroqen"><a href='/droqen.php'>i'm droqen!</a></div>
 		</div>
-
-		<script src="/engine_43custom/godot.js?d=2&v=2"></script>
-		<script src="/engine_43custom/cat.js?d=2&v=2" defer></script>
-		<script defer>
-			setTimeout(()=>{
-				Cat.boot("<?php echo $gamezippath; ?>", <?php echo $gamezipsize; ?>);
-			},100);
-		</script>
-		<script>
-			const canvasEl = document.getElementById("canvas")
-			const canvasParent = canvasEl.parentElement;
-
-			function isArrayOrTypedArray(x) {
-				return Boolean(
-					x && (typeof x === 'object') && (Array.isArray(x) || (ArrayBuffer.isView(x) && !(x instanceof DataView)))
-				);
-			}
-
-			window.addEventListener('canvasGameLoaded', (_ev)=>{
-				console.log(`game loaded`);
-				resizeCanvas();
-			});
-
-			let gameWidth = 200;
-			let gameHeight = 200;
-
-			window.addEventListener('setGameSize', (size)=>{
-				gameWidth = Number(size['w']);
-				gameHeight = Number(size['h']);
-				console.log(`setGameSize(${gameWidth}, ${gameHeight})`);
-				resizeCanvas();
-			})
-			window.addEventListener('resize', (_ev)=>{ resizeCanvas(); }, true);
-
-			function resizeCanvas() {
-				let pw = canvasParent.clientWidth;	
-				let ph = canvasParent.clientHeight;
-				let bw = gameWidth;
-				let bh = gameHeight;
-				let scale = Math.floor(Math.min(pw/bw, ph/bh));
-				if (scale < 1) { scale = 1; }
-				let sw = bw * scale;
-				let sh = bh * scale;
-				canvasEl.style.position = "absolute";
-				canvasEl.style.left = `${Math.floor((pw-sw)/2)}px`;
-				canvasEl.style.top = `${Math.floor((ph-sh)/2)}px`;
-				canvasEl.width = sw;
-				canvasEl.height = sh;
-			}
-		</script>
-		<div id="countdown"><span id="countdown_ts"></span></div>
-		<?php 
-		if (isset($gamesourcelink))  {
-			echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
-		}
-		?>
-		<div id="imdroqen"><a href='/droqen.php'>i'm droqen!</a></div>
+		<div id="foldfp" class="fullpage">
+			<div class="content">
+				<div id="gametitle">
+					Testing. Title div below the fold.
+				</div>
+				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. </p>
+				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not quite enough text. I'll just repeat myself one more time. Testing. Paragraph below the fold. Lorem ipsum and what not. OK, that's got to be enough text.</p>
+			</div>
+		</div>
 	</body>
 	<script src="/scripts/cycling_pastel_bg.js"></script>
 	<script>

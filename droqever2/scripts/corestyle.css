@@ -27,6 +27,11 @@ a:hover {
 
 /* game-page stuff */
 
+#gamefp.fullpage {
+	height: 100vh;
+	padding: 0; margin: 0;
+}
+
 #canvas {
 	display: block;
 	filter: blur(0.33vmin);
@@ -91,6 +96,16 @@ a:hover {
 	border: 0;
 	border-image-width: 0;
 	outline: none;
+}
+
+/* everything under the fold */
+
+#foldfp.fullpage {
+	min-height: 100vh; /* it can stretch larger as necessary */
+	margin: 0; padding: 0;
+}
+#foldfp .content {
+	padding: 1em;
 }
 
 /* various corner-UI stuff */
