@@ -132,10 +132,15 @@ Cat = (function () {
 		window.dispatchEvent(setGameSizeEvent);
 	}
 
+	var on_windfish_awakened = function() {
+		console.log("WINDFISH AWAKENED!");
+	}
+
 	return {
 		boot : boot,
 		try_start_game : try_start_game,
 		set_game_size : set_game_size,
+		on_windfish_awakened : on_windfish_awakened,
 	}
 }());
 
