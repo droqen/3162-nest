@@ -161,6 +161,7 @@ div.reply pre {
 	margin: 0; padding: 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 1.25em;
+	white-space: pre-wrap;
 }
 
 /* various corner-UI stuff */
