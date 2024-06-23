@@ -1,12 +1,23 @@
 <?php
 
-$access_granted = false;
+$show_gamepost = false;
+$show_replies = false;
 
 if (isset($_GET['url'])) {
 	require_once __DIR__ . '/db/init-$conn.php';
 	$searchname = str_replace("-/","",$_GET['url']);
 	$gametitle = $searchname; // change this later
-	$res = $conn->query("SELECT postid, posttype, NOW(), postexpires FROM posts WHERE name = '$searchname' AND (postexpires = null OR NOW() < postexpires) ORDER BY postdate DESC, postid DESC");
+	$res = $conn->query("SELECT
+			postid,
+			posttype,
+			NOW(),
+			postexpires,
+			IF(postexpires = null or NOW()<postexpires,'True','False') 
+		FROM posts
+		WHERE
+			name = '$searchname'
+			-- AND (postexpires = null OR NOW() < postexpires)
+			ORDER BY postdate DESC, postid DESC");
 	foreach ($res as $row) {
 		$postid = $row[0];
 		$posttype = $row[1];
@@ -14,10 +25,12 @@ if (isset($_GET['url'])) {
 		// echo($row[3] . "<br/>");
 		$time_current = strtotime($row[2]);
 		$time_expires = strtotime($row[3]);
+		// do i need to use $row[4]?
 		// echo("current " . $time_current . "<br/>");
 		// echo("expires " . $time_expires . "<br/>");
 		$lifetime_remaining = max(0, $time_expires - $time_current);
-		if ($lifetime_remaining > 0) { $access_granted = true; }
+		if ($lifetime_remaining > 0) { $show_gamepost = true; }
+		else { $show_replies = true; }
 		break;
 	}
 	if (isset($postid)) {
@@ -40,8 +53,10 @@ if (isset($_GET['url'])) {
 	}
 }
 
-if ($access_granted && isset($gamezipsize)) {
+if ($show_gamepost && isset($gamezipsize)) {
 	require_once __DIR__ . '/pages/game-page-43custom.php';
+} else if ($show_replies && isset($postid)) {
+	require_once __DIR__ . '/pages/replies-page.php';
 } else {
 	require_once __DIR__ . '/pages/404-page.html';
 }

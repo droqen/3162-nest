@@ -133,7 +133,9 @@ Cat = (function () {
 	}
 
 	var on_windfish_awakened = function() {
-		console.log("WINDFISH AWAKENED!");
+		let wfAwakenedEvent = new Event("wfAwakened", {});
+		console.log("WINDFISH AWAKENED. <this should only be sent 1x>"); // todo - only send this once
+		window.dispatchEvent(wfAwakenedEvent);
 	}
 
 	return {

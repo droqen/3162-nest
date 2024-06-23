@@ -9,6 +9,7 @@
 		<title><?php echo $gametitle;?></title>
 	</head>
 	<body>
+		<div id="awaken_scroll_target" style="position:absolute; top:100px;"></div>
 		<div id="gamefp" class="fullpage">
 			<canvas id="canvas">
 				Your browser does not support the canvas tag.
@@ -25,7 +26,7 @@
 			</div>
 
 			<script src="/engine_43custom/godot.js?d=2&v=2"></script>
-			<script src="/engine_43custom/cat.js?d=2&v=2" defer></script>
+			<script src="/engine_43custom/cat.js?d=22&v=1" defer></script>
 			<script defer>
 				setTimeout(()=>{
 					Cat.boot("<?php echo $gamezippath; ?>", <?php echo $gamezipsize; ?>);
@@ -56,6 +57,14 @@
 					resizeCanvas();
 				})
 				window.addEventListener('resize', (_ev)=>{ resizeCanvas(); }, true);
+				
+				window.addEventListener('wfAwakened', (_noargs)=>{
+					// document.activeElement.blur();
+					document.getElementById('foldfp').style.display = '';
+					// document.getElementById('thoughts_textarea').focus();
+					document.getElementById('awaken_scroll_target').scrollIntoView();
+					// document.getElementById('thoughts_textarea').scrollIntoView();
+				})
 
 				function resizeCanvas() {
 					let pw = canvasParent.clientWidth;	
@@ -79,18 +88,70 @@
 				echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
 			}
 			?>
-			<div id="imdroqen"><a href='/droqen.php'>i'm droqen!</a></div>
+			<div id='gamecontrols'>keyboard: wsad/↑↓←→ </div>
+			<div id='imdroqen'><a href='/droqen.php'>i'm droqen!</a></div>
 		</div>
-		<div id="foldfp" class="fullpage">
+		<div id="foldfp" class="fullpage" style="display: none;">
 			<div class="content">
-				<div id="gametitle">
+				<form id="thoughts_form">
+					hi! droqen here! you cleared the stage, what'd you think?<br/>
+					sign your name if you want to be known. no accounts here yet :)<br/>
+					<textarea id="thoughts_textarea"></textarea><br />
+					<!-- sign your name please<br/><input type="text" name="name" value="" required><br/> -->
+					<!-- and your email if you would like 1 notification when it's live ^^<br/><input type="email" name="email" pattern=".+@.+\..+"><br/> -->
+					<!-- <i>~all messages will go live in a big batch when the game disappears~</i><br/> -->
+					<input id="thoughts_submit_button" type="submit" value="OK, send!"><span id="submit_problem"></span>
+				</form>
+				<div id="thoughts_submitted" style="display:none;">
+					thanks for sharing your thoughts! they'll be going live when the game disappears.
+					come back later to see everyone's comments!<br/>
+					<br/>
+					in the meantime, please feel free to share the link to this game anywhere, visit my <a href="https://droqen.itch.io/">itch io</a> page, or bug me on <a href="https://twitter.com/droqen">twitter</a>. (ugh, ok, "<a href="https://x.com/droqen">x</a>")<br/>
+					<br/>
+					-love, droqen
+				</div>
+				<!-- <div id="gametitle">
 					Testing. Title div below the fold.
 				</div>
 				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. </p>
-				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not quite enough text. I'll just repeat myself one more time. Testing. Paragraph below the fold. Lorem ipsum and what not. OK, that's got to be enough text.</p>
+				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not quite enough text. I'll just repeat myself one more time. Testing. Paragraph below the fold. Lorem ipsum and what not. OK, that's got to be enough text.</p> -->
 			</div>
 		</div>
 	</body>
+	<script>
+		function submitThoughts() { // TODO.
+			let xmlhttp= window.XMLHttpRequest ?
+				new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+			let submit_button = document.getElementById("thoughts_submit_button");
+			submit_button.value = "Sending...";
+			submit_button.disabled = true;
+
+			xmlhttp.open("POST","/db/post-addcomment.php", true);
+			xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState === 4 && this.status === 200) {
+					if(this.responseText === undefined || this.responseText.length <= 1){
+						document.getElementById("thoughts_form").remove();
+						document.getElementById("thoughts_submitted").style.display = '';
+					} else {
+						window.setTimeout(function(){
+							document.getElementById("submit_problem").innerText = this.responseText;
+							submit_button.value = "OK, send!";
+							submit_button.disabled = false;
+						},500);
+					}
+				}
+			}
+
+			let params = "pname=<?php echo $gametitle; ?>&msg=" + document.getElementById('thoughts_textarea').value;
+			xmlhttp.send(params);
+		}
+		document.getElementById("thoughts_form").addEventListener('submit', function(event) { 
+			event.preventDefault(); 
+			submitThoughts();
+		});
+	</script>
 	<script src="/scripts/cycling_pastel_bg.js"></script>
 	<script>
 		var distance = <?php echo $lifetime_remaining; ?>;
