@@ -142,7 +142,7 @@ div.thanks {
 	background-color: white;
 	margin: 1em;
 	padding: 1em;
-	line-height: 1em; /* back to normal. */
+	line-height: normal;
 }
 
 div.reply {
@@ -150,7 +150,7 @@ div.reply {
 	margin: 1em;
 	padding: 1em;
 	border-radius: 1.5em;
-	line-height: 1em; /* back to normal. */
+	line-height: normal;
 }
 
 div#thanks {
