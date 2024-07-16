@@ -47,8 +47,8 @@
 					resizeCanvas();
 				});
 
-				let gameWidth = 200;
-				let gameHeight = 200;
+				let gameWidth = undefined;
+				let gameHeight = undefined;
 
 				window.addEventListener('setGameSize', (size)=>{
 					gameWidth = Number(size['w']);
@@ -69,17 +69,25 @@
 				function resizeCanvas() {
 					let pw = canvasParent.clientWidth;	
 					let ph = canvasParent.clientHeight;
-					let bw = gameWidth;
-					let bh = gameHeight;
-					let scale = Math.floor(Math.min(pw/bw, ph/bh));
-					if (scale < 1) { scale = 1; }
-					let sw = bw * scale;
-					let sh = bh * scale;
-					canvasEl.style.position = "absolute";
-					canvasEl.style.left = `${Math.floor((pw-sw)/2)}px`;
-					canvasEl.style.top = `${Math.floor((ph-sh)/2)}px`;
-					canvasEl.width = sw;
-					canvasEl.height = sh;
+					if (gameWidth === undefined) {
+						canvasEl.style.position = "absolute";
+						canvasEl.style.left = `0px`;
+						canvasEl.style.top = `0px`;
+						canvasEl.width = pw;
+						canvasEl.height = ph;
+					} else {
+						let bw = gameWidth;
+						let bh = gameHeight;
+						let scale = Math.floor(Math.min(pw/bw, ph/bh));
+						if (scale < 1) { scale = 1; }
+						let sw = bw * scale;
+						let sh = bh * scale;
+						canvasEl.style.position = "absolute";
+						canvasEl.style.left = `${Math.floor((pw-sw)/2)}px`;
+						canvasEl.style.top = `${Math.floor((ph-sh)/2)}px`;
+						canvasEl.width = sw;
+						canvasEl.height = sh;
+					}
 				}
 			</script>
 			<div id="countdown"><span id="countdown_ts"></span></div>
@@ -88,7 +96,13 @@
 				echo "<div id='gamesourcelink'><a href='$gamesourcelink'>view game source</a> <span style='font-size:85%;'>(might be private)</span></div>";
 			}
 			?>
-			<div id='gamecontrols'>keyboard: wsad/↑↓←→ </div>
+			<div id='gamecontrols'><?php
+				if (isset($gamecontrols) and $gamecontrols != null) {
+					echo $gamecontrols;
+				} else {
+					echo 'keyboard: wsad/↑↓←→ ';
+				}
+			?></div>
 			<div id='imdroqen'><a href='/droqen.php'>i'm droqen!</a></div>
 		</div>
 		<div id="foldfp" class="fullpage" style="display: none;">
