@@ -4,8 +4,8 @@ require_once __DIR__ . '/die-if-not-droqen-session.php';
 require_once __DIR__ . '/init-$conn.php';
 
 $res = $conn->query("SELECT posts.postid, posts.name
-	FROM posts, games_43customadam 
-	WHERE (posttype = 1 AND posts.postid = games_43customadam.postid AND (postexpires = null OR NOW() < postexpires))
+	FROM posts
+	WHERE (postexpires = null OR NOW() < postexpires)
 	ORDER BY posts.postid DESC");
 
 echo "<h1>active games</h1>";

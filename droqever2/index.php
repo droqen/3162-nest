@@ -34,7 +34,35 @@ if (isset($_GET['url'])) {
 		break;
 	}
 	if (isset($postid)) {
-		if ($posttype == 1) {
+		if ($posttype == 3) {
+			$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43 WHERE postid = $postid");
+			foreach ($res as $row) {
+				$gamezipname = $row[0];
+				$gamesourcelink = $row[1];
+				$gamecontrols = $row[2];
+				$gamezippath = "/games_43/$gamezipname.zip";
+				if (file_exists(__DIR__ . $gamezippath)) {
+					$gamezipsize = filesize(__DIR__ . $gamezippath);
+				} else {
+					die("Missing file at $gamezippath for posttype $posttype zipname $gamezipname");
+				}
+				break;
+			}
+		} else if ($posttype == 2) {
+				$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43beta3 WHERE postid = $postid");
+				foreach ($res as $row) {
+					$gamezipname = $row[0];
+					$gamesourcelink = $row[1];
+					$gamecontrols = $row[2];
+					$gamezippath = "/games_43beta3/$gamezipname.zip";
+					if (file_exists(__DIR__ . $gamezippath)) {
+						$gamezipsize = filesize(__DIR__ . $gamezippath);
+					} else {
+						die("Missing file at $gamezippath for posttype $posttype zipname $gamezipname");
+					}
+					break;
+				}
+		} else if ($posttype == 1) {
 			$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43customadam WHERE postid = $postid");
 			foreach ($res as $row) {
 				$gamezipname = $row[0];
@@ -49,7 +77,7 @@ if (isset($_GET['url'])) {
 				break;
 			}
 		} else {
-			die("Unknown posttype $posttype for #$postid");
+			die("Unknown posttype $posttype for #$postid (known posttypes are [1,2])");
 		}
 	}
 }
