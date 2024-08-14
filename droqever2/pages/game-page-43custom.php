@@ -132,8 +132,8 @@
 				<div id="discord_link">
 					never miss a droqever! i'm still figuring this out, but here are a couple solutions that i'm trying:
 					<ul>
-						<li>join a <a href="https://discord.gg/aNsm4PveGZ">very minimal discord server/a> with 2 channels and nobody in it yet</li>
-						<li>or follow the <a href="">rss feed</a> i made just for rp0. like, does anyone else use this ancient technology?</li>
+						<li>join a <a href="https://discord.gg/aNsm4PveGZ">very minimal discord server</a> with 2 channels and nobody in it yet</li>
+						<li>or follow the <a href="https://droqever.com/rss.php">rss feed</a> i made just for rp0. like, does anyone else use this ancient technology?</li>
 					</ul>
 				</div>
 				<!-- <div id="gametitle">
