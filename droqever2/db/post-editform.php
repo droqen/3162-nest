@@ -131,10 +131,13 @@ if (isset($_POST['editid'])) {
 		$sourcelink = $_POST['sourcelink'];
 		$stmt = $conn->prepare("UPDATE $target_game_table_name SET sourcelink = ? WHERE postid = $editid");
 		$stmt->execute([$sourcelink]);
-		echo("<br/>OK! Um, updated the sourcelink to `$sourcelink`! I guess!");
+		echo("<br/>OK! Updated the sourcelink to `<a href='$sourcelink'>$sourcelink</a>`!");
 	}
 
 	echo("<br/>...<br/>Done making the above edits to #$editid! If you didn't see anything, that means nothing happened!");
+	
+	$postname = $_POST['postname'];
+	echo(" - <a href='https://www.droqever.com/-/$postname'>Click to goto game</a>");
 
 }
 
