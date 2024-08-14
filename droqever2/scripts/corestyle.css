@@ -110,7 +110,7 @@ a:hover {
 	padding: 1em;
 }
 
-form#thoughts_form, div#thoughts_submitted {
+form#thoughts_form, div#thoughts_submitted, div#discord_link {
 	background-color: white;
 	margin: 1em;
 	padding: 1em;
