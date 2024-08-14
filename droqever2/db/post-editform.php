@@ -99,6 +99,10 @@ if (isset($_POST['insert_previd'])) {
 		echo("<br/>Inserted entry into games_43customadam (3/3) - <a href='https://www.droqever.com/-/$postname'>Click to goto game</a>");
 	}
 
+} else {
+	// default behaviour
+	$target_file_folder_name = "games_43";
+	$target_game_table_name = "games_43";
 }
 
 if (isset($_POST['editid'])) {
@@ -107,25 +111,25 @@ if (isset($_POST['editid'])) {
 		echo("<br/>OK, trying to upload new gamezip...");
 		$editid = $_POST['editid'];
 		$zipname = '';
-		$res = $conn->query("SELECT zipname FROM games_43customadam WHERE postid = $editid LIMIT 1");
+		$res = $conn->query("SELECT zipname FROM $target_game_table_name WHERE postid = $editid LIMIT 1");
 		foreach ($res as $row) {
 			$zipname = $row[0];
 			break;
 		}
 		if ($zipname != '') {
-			$target_filedir = $_SERVER['DOCUMENT_ROOT'] . "/games_43custom";
+			$target_filedir = $_SERVER['DOCUMENT_ROOT'] . "/$target_file_folder_name";
 			$target_filename = "$zipname.zip";
 			$target_filepath = "$target_filedir/$target_filename";
 			if (move_uploaded_file($_FILES["gamezip"]["tmp_name"], $target_filepath)) {
 				echo("<br/>Looks OK! (replaced file!)");
 			} else { die("<pre>[post-editform.php]</pre> <b>Problem!</b> Failed uploading file."); }
 			$filesize = $_FILES["gamezip"]["size"];
-			$conn->query("UPDATE games_43customadam SET zipsize = $filesize WHERE postid = $editid");
+			$conn->query("UPDATE $target_game_table_name SET zipsize = $filesize WHERE postid = $editid");
 		} else { die("<pre>[post-editform.php]</pre> <b>Problem!</b> No zipname for editid #$editid"); }
 	}
 	if (isset($_POST['sourcelink'])) {
 		$sourcelink = $_POST['sourcelink'];
-		$stmt = $conn->prepare("UPDATE games_43customadam SET sourcelink = ? WHERE postid = $editid");
+		$stmt = $conn->prepare("UPDATE $target_game_table_name SET sourcelink = ? WHERE postid = $editid");
 		$stmt->execute([$sourcelink]);
 		echo("<br/>OK! Um, updated the sourcelink to `$sourcelink`! I guess!");
 	}

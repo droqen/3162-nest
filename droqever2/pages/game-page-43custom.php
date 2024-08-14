@@ -97,6 +97,11 @@
 			}
 			?>
 			<div id='gamecontrols'><?php
+				
+				if (isset($gamebeeplink))  {
+					echo "<a href='$gamebeeplink' target='_blank'>play game music</a> <span style='font-size:85%;'>(opens in new tab)</span><br/>";
+				}
+
 				if (isset($gamecontrols) and $gamecontrols != null) {
 					echo $gamecontrols;
 				} else {
@@ -123,6 +128,9 @@
 					in the meantime, please feel free to share the link to this game anywhere, visit my <a href="https://droqen.itch.io/">itch io</a> page, or bug me on <a href="https://twitter.com/droqen">twitter</a>. (ugh, ok, "<a href="https://x.com/droqen">x</a>")<br/>
 					<br/>
 					-love, droqen
+				</div>
+				<div id="discord_link">
+					oh, and if you're interested... you can join a <a href="https://discord.gg/NszqEABsnm">small discord server</a> as a temporary, transient member.
 				</div>
 				<!-- <div id="gametitle">
 					Testing. Title div below the fold.

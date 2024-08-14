@@ -42,7 +42,7 @@ if (isset($_GET['show_add'])) {
 		$postname = $row[0];
 		break;
 	}
-	$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43beta3 WHERE postid = $currgame_postid");
+	$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43 WHERE postid = $currgame_postid");
 	foreach ($res as $row) {
 		$zipname = $row[0];
 		$sourcelink = $row[1];

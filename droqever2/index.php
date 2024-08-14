@@ -35,11 +35,12 @@ if (isset($_GET['url'])) {
 	}
 	if (isset($postid)) {
 		if ($posttype == 3) {
-			$res = $conn->query("SELECT zipname, sourcelink, controls FROM games_43 WHERE postid = $postid");
+			$res = $conn->query("SELECT zipname, sourcelink, beeplink, controls FROM games_43 WHERE postid = $postid");
 			foreach ($res as $row) {
 				$gamezipname = $row[0];
 				$gamesourcelink = $row[1];
-				$gamecontrols = $row[2];
+				$gamebeeplink = $row[2];
+				$gamecontrols = $row[3];
 				$gamezippath = "/games_43/$gamezipname.zip";
 				if (file_exists(__DIR__ . $gamezippath)) {
 					$gamezipsize = filesize(__DIR__ . $gamezippath);
