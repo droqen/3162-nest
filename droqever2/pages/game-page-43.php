@@ -25,7 +25,7 @@
 				<div id="status-notice"></div>
 			</div>
 
-			<script src="/engine_43/godot.js?d=18&v=1"></script>
+			<script src="/engine_43/godot.js?d=18&v=3"></script>
 			<script src="/engine_43/cat.js?d=18&v=1" defer></script>
 			<script defer>
 				setTimeout(()=>{
