@@ -138,11 +138,19 @@ Cat = (function () {
 		window.dispatchEvent(wfAwakenedEvent);
 	}
 
+	var on_windfish_lucidwake = function(memory) {
+		let wfLucidWakeEvent = new Event("wfLucidWake", {});
+		console.log(`WINDFISH AWAKENED LUCIDLY RECALLING '${memory}'. <this should only be sent 1x>`); // todo - only send this once
+		wfLucidWakeEvent['memory'] = memory;
+		window.dispatchEvent(wfLucidWakeEvent);
+	}
+
 	return {
 		boot : boot,
 		try_start_game : try_start_game,
 		set_game_size : set_game_size,
 		on_windfish_awakened : on_windfish_awakened,
+		on_windfish_lucidwake : on_windfish_lucidwake,
 	}
 }());
 
