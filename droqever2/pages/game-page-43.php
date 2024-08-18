@@ -67,11 +67,10 @@
 				})
 				
 				window.addEventListener('wfLucidWake', (args)=>{
-					console.log(window.location.href, args, window.location.href.includes("seeing-like-an-industry"));
 					if (args['memory']=="B" && window.location.href.includes("seeing-like-an-industry")) {
 						// handle a specific special case
 						// TODO: use more general system for handling this pls . . . 
-						window.location.href = "https://www.droqever.com/-/blind-like-an-artist/";
+						window.location.href = "https://www.droqever.com/-/blind-like-an-artist";
 					} else {
 						document.getElementById('foldfp').style.display = '';
 						document.getElementById('awaken_scroll_target').scrollIntoView();
@@ -156,6 +155,11 @@
 				<p>Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not enough text. I'll just repeat myself. Testing. Paragraph below the fold. Lorem ipsum and what not. Oh, that's not quite enough text. I'll just repeat myself one more time. Testing. Paragraph below the fold. Lorem ipsum and what not. OK, that's got to be enough text.</p> -->
 			</div>
 		</div>
+		<!-- <div id="technical_difficulties" style="position:absolute; left:40%; top:40%; width:50%; font-size:40px; font-weight: bold; line-height: 40px;">
+			Technical Difficulties,<br/>
+			Please Stand By<br/>
+			-droqen
+		</div> -->
 	</body>
 	<script>
 		function submitThoughts() { // TODO.

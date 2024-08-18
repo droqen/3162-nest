@@ -52,7 +52,7 @@ Cat = (function () {
 			engine.startGame({
 				'args': [],
 				'mainPack': game_path,
-				'fileSizes':{game_path:game_filesize,"/engine_43custom/godot.wasm":46560934},
+				'fileSizes':{game_path:game_filesize,"/engine_43/godot.wasm":43016933},
 				'onProgress': function (current, total) {
 					if (current > 0 && total > 0) {
 						statusProgress.value = current;
@@ -75,7 +75,7 @@ Cat = (function () {
 		"args":[],
 		"canvasResizePolicy":0, // default 2, but in my case - i want to handle it manually. see 'resize' event below.
 		"ensureCrossOriginIsolationHeaders":true,
-		"executable":"/engine_43custom/godot",
+		"executable":"/engine_43/godot",
 		"mainPack":"/games_43custom/void.zip",
 		"experimentalVK":false,
 		"focusCanvas":true,
