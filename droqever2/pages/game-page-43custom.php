@@ -26,7 +26,7 @@
 			</div>
 
 			<script src="/engine_43custom/godot.js?d=2&v=2"></script>
-			<script src="/engine_43custom/cat.js?d=22&v=1" defer></script>
+			<script src="/engine_43custom/cat.js?d=28&v=1" defer></script>
 			<script defer>
 				setTimeout(()=>{
 					Cat.boot("<?php echo $gamezippath; ?>", <?php echo $gamezipsize; ?>);
