@@ -65,6 +65,19 @@
 					document.getElementById('awaken_scroll_target').scrollIntoView();
 					// document.getElementById('thoughts_textarea').scrollIntoView();
 				})
+				
+				window.addEventListener('wfLucidWake', (args)=>{
+					console.log(window.location.href, args, window.location.href.includes("seeing-like-an-industry"));
+					if (args['memory']=="B" && window.location.href.includes("seeing-like-an-industry")) {
+						// handle a specific special case
+						// TODO: use more general system for handling this pls . . . 
+						window.location.href = "https://www.droqever.com/-/blind-like-an-artist/";
+					} else {
+						document.getElementById('foldfp').style.display = '';
+						document.getElementById('awaken_scroll_target').scrollIntoView();
+					}
+				})
+
 
 				function resizeCanvas() {
 					let pw = canvasParent.clientWidth;	
