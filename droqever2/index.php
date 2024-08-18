@@ -84,7 +84,7 @@ if (isset($_GET['url'])) {
 }
 
 if ($show_gamepost && isset($gamezipsize)) {
-	require_once __DIR__ . '/pages/game-page-43custom.php';
+	require_once __DIR__ . '/pages/game-page-43.php';
 } else if ($show_replies && isset($postid)) {
 	require_once __DIR__ . '/pages/replies-page.php';
 } else {
