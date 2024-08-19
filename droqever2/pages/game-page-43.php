@@ -131,7 +131,8 @@
 					<!-- sign your name please<br/><input type="text" name="name" value="" required><br/> -->
 					<!-- and your email if you would like 1 notification when it's live ^^<br/><input type="email" name="email" pattern=".+@.+\..+"><br/> -->
 					<!-- <i>~all messages will go live in a big batch when the game disappears~</i><br/> -->
-					<input id="thoughts_submit_button" type="submit" value="OK, send!"><span id="submit_problem"></span>
+					<input id="thoughts_submit_button" type="submit" value="OK, send!"><span id="submit_problem"></span><br/>
+					<span style="font-size:85%">(note: may be made public later, dont post your address or anything)</span>
 				</form>
 				<div id="thoughts_submitted" style="display:none;">
 					thanks for sharing your thoughts! they'll be going live when the game disappears.
