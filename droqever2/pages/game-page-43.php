@@ -66,15 +66,56 @@
 					document.getElementById('awaken_scroll_target').scrollIntoView();
 					// document.getElementById('thoughts_textarea').scrollIntoView();
 				})
+
+				function showCommentsField() {
+					document.getElementById('foldfp').style.display = '';
+					document.getElementById('awaken_scroll_target').scrollIntoView();
+				}
 				
 				window.addEventListener('wfLucidWake', (args)=>{
 					if (args['memory']=="B" && window.location.href.includes("seeing-like-an-industry")) {
 						// handle a specific special case
 						// TODO: use more general system for handling this pls . . . 
 						window.location.href = "https://www.droqever.com/-/blind-like-an-artist";
+					} else if (args['memory']!==undefined) {
+						xmlhttp.open("POST","/db/post-checkpath.php", true);
+						xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xmlhttp.onreadystatechange = function() {
+							if (this.readyState === 4 && this.status === 200) {
+								if(this.responseText === undefined || this.responseText.length <= 1){
+									// on failed response received?
+									// document.getElementById("thoughts_form").remove();
+									// document.getElementById("thoughts_submitted").style.display = '';
+									showCommentsField();
+								} else if (this.responseText.startsWith("OK!")) {
+									// great! let's try loading another game.
+									let args = this.responseText.split(";");
+									if (args.length == 3) {
+										let filepath = args[1];
+										let filesize = Number(args[2]);
+										console.log("lucidwake ~ trying to start new game! ", this.responseText, filepath, filesize);
+										Cat.try_start_game(filepath, filesize);
+									} else {
+										console.log("lucidwake ERR ~ malformed response: ",this.responseText);
+										showCommentsField();
+									}
+								} else {
+									showCommentsField();
+									// window.setTimeout(function(){
+									// 	document.getElementById("submit_problem").innerText = this.responseText;
+									// 	submit_button.value = "OK, send!";
+									// 	submit_button.disabled = false;
+									// },500);
+								}
+							}
+						}
+
+						let params = "from_postid=" + 50.toString() + "&exitname=" + args['memory'];
+						xmlhttp.send(params);
+
+						// showCommentsField();
 					} else {
-						document.getElementById('foldfp').style.display = '';
-						document.getElementById('awaken_scroll_target').scrollIntoView();
+						showCommentsField();
 					}
 				})
 
