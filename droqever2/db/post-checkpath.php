@@ -14,15 +14,16 @@
 		$to_postid = $row[0];
 		$entername = $row[1];
 		if (true) { // check posts to get games table name
-			$stmt = $conn->prepare("SELECT zipname, zipsize FROM games_43 WHERE postid=? LIMIT 1");
+			$stmt = $conn->prepare("SELECT postid, zipname, zipsize FROM games_43 WHERE postid=? LIMIT 1");
 			$stmt->execute([$to_postid]);
 			$row = $stmt->fetch();
 			if ($row) {
-				$gamezipname = $row[0];
-				$gamezipsize = $row[1];
+				$postid = $row[0];
+				$gamezipname = $row[1];
+				$gamezipsize = $row[2];
 				$gamezippath = "/games_43/$gamezipname.zip";
-				
-				die("OK!;$gamezippath;$gamezipsize");
+
+				die("OK!;$postid;$gamezippath;$gamezipsize");
 			} else {
 				die("Problem! to_postid value $to_postid not found on table games_43");
 			}

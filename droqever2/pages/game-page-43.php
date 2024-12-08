@@ -48,6 +48,7 @@
 					resizeCanvas();
 				});
 
+				let postid = <?php echo $postid; ?>;
 				let gameWidth = undefined;
 				let gameHeight = undefined;
 
@@ -105,10 +106,11 @@
 									console.log("CASE B (OK!)");
 									// great! let's try loading another game.
 									let args = this.responseText.split(";");
-									if (args.length == 3) {
-										let filepath = args[1];
-										let filesize = Number(args[2]);
-										console.log("lucidwake ~ trying to start new game! ", this.responseText, filepath, filesize);
+									if (args.length == 4) {
+										postid = Number(args[1]);
+										let filepath = args[2];
+										let filesize = Number(args[3]);
+										console.log("lucidwake ~ trying to start new game! ", this.responseText, postid, filepath, filesize);
 										Cat.try_start_game(filepath, filesize);
 									} else {
 										console.log("lucidwake ERR ~ malformed response: ",this.responseText);
@@ -128,7 +130,7 @@
 							}
 						}
 
-						let params = "from_postid=" + 49 + "&exitname=" + args['memory'];
+						let params = "from_postid=" + Math.floor(postid) + "&exitname=" + args['memory'];
 						xmlhttp.send(params);
 
 						// showCommentsField();
