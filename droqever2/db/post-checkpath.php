@@ -18,9 +18,11 @@
 			$stmt->execute([$to_postid]);
 			$row = $stmt->fetch();
 			if ($row) {
-				$zipname = $row[0];
-				$zipsize = $row[1];
-				die("OK!;$zipname;$zipsize");
+				$gamezipname = $row[0];
+				$gamezipsize = $row[1];
+				$gamezippath = "/games_43/$gamezipname.zip";
+				
+				die("OK!;$gamezippath;$gamezipsize");
 			} else {
 				die("Problem! to_postid value $to_postid not found on table games_43");
 			}

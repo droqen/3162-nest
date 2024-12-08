@@ -72,22 +72,37 @@
 					document.getElementById('awaken_scroll_target').scrollIntoView();
 				}
 				
+				console.log("setting up event listener for wfLucidWake . . .");
+
 				window.addEventListener('wfLucidWake', (args)=>{
+
+					console.log("CALLED wfLucidWake with args",args);
+
 					if (args['memory']=="B" && window.location.href.includes("seeing-like-an-industry")) {
 						// handle a specific special case
 						// TODO: use more general system for handling this pls . . . 
 						window.location.href = "https://www.droqever.com/-/blind-like-an-artist";
 					} else if (args['memory']!==undefined) {
+						
+						let xmlhttp= window.XMLHttpRequest ?
+							new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+						console.log("'memory' arg found, pitching an ajax...");
+
+
 						xmlhttp.open("POST","/db/post-checkpath.php", true);
 						xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 						xmlhttp.onreadystatechange = function() {
 							if (this.readyState === 4 && this.status === 200) {
+								console.log("responseText received",this.responseText);
 								if(this.responseText === undefined || this.responseText.length <= 1){
+									console.log("CASE A");
 									// on failed response received?
 									// document.getElementById("thoughts_form").remove();
 									// document.getElementById("thoughts_submitted").style.display = '';
 									showCommentsField();
 								} else if (this.responseText.startsWith("OK!")) {
+									console.log("CASE B (OK!)");
 									// great! let's try loading another game.
 									let args = this.responseText.split(";");
 									if (args.length == 3) {
@@ -100,6 +115,7 @@
 										showCommentsField();
 									}
 								} else {
+									console.log("CASE C");
 									showCommentsField();
 									// window.setTimeout(function(){
 									// 	document.getElementById("submit_problem").innerText = this.responseText;
@@ -107,17 +123,22 @@
 									// 	submit_button.disabled = false;
 									// },500);
 								}
+							} else {
+								console.log("CASE D", this.readyState, this.status);
 							}
 						}
 
-						let params = "from_postid=" + 50.toString() + "&exitname=" + args['memory'];
+						let params = "from_postid=" + 49 + "&exitname=" + args['memory'];
 						xmlhttp.send(params);
 
 						// showCommentsField();
 					} else {
+						console.log("no 'memory' arg")
 						showCommentsField();
 					}
 				})
+
+				console.log(". . . done setting up wfLucidWake!");
 
 				let synth;
 				let audioContextStarted = false;
