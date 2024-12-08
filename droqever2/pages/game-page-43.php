@@ -25,6 +25,7 @@
 				<div id="status-notice"></div>
 			</div>
 
+			<script src="/beepbox/beepbox_synth_jummb.js"></script>
 			<script src="/engine_43/godot.js?d=18&v=3"></script>
 			<script src="/engine_43/cat.js?d=18&v=1" defer></script>
 			<script defer>
@@ -77,6 +78,22 @@
 					}
 				})
 
+				let synth;
+
+				window.addEventListener('songlink', (args)=>{
+					// todo songlink
+					let songlink_full = args['songlink'];
+					let hash_index = songlink_full.indexOf('#');
+					if (hash_index >= 0) {
+						let songcode = songlink_full.substr(hash_index);
+						if (synth != null) { synth.pause(); }
+						synth = new beepbox.Synth(songcode);
+						synth.play(); // might not be necessary?
+						// if (synth.isPlayingSong) {}
+					} else {
+						console.log('invalid songlink');
+					}
+				})
 
 				function resizeCanvas() {
 					let pw = canvasParent.clientWidth;	

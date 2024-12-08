@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>BeepBox Synth Example</title>
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	<body>
+		<button onclick="togglePlay()">Play/Pause</button>
+		<p>View page source to see how to play this song from javascript!</p>
+		<script type="text/javascript" src="beepbox/beepbox_synth_jummb.js"></script>
+		<script type="text/javascript">
+			var synth = new beepbox.Synth(
+				// "5sbk4l00e0ftaa7g0fj7i0r1w1100f0000d1110c0000h0000v2200o3320b4z8Ql6hkpUsiczhkp5hDxN8Od5hAl6u74z8Ql6hkpUsp24ZFzzQ1E39kxIceEtoV8s66138l1S0L1u2139l1H39McyaeOgKA0TxAU213jj0NM4x8i0o0c86ywz7keUtVxQk1E3hi6OEcB8Atl0q0Qmm6eCexg6wd50oczkhO8VcsEeAc26gG3E1q2U406hG3i6jw94ksf8i5Uo0dZY26kHHzxp2gAgM0o4d516ej7uegceGwd0q84czm6yj8Xa0Q1EIIctcvq0Q1EE3ihE8W1OgV8s46Icxk7o24110w0OdgqMOk392OEWhS1ANQQ4toUctBpzRxx1M0WNSk1I3ANMEXwS3I79xSzJ7q6QtEXgw0"
+				"#j6N0junderwater-tensionsn310s0k0l00e00t2ma7g0fj07r1O_U00000000i0o323T5v0pua6f154q8540Oa0d230HYr901i8ah00000h0E0c0T1v0pueaf012ta00q0C010r5000Oa7d180A8F8B8Q126bPda58R0000E4c0b862863g78T1v09u34f0000q0B1710Oa0d080AcFhB3Q01a5P9939R0000E2c0b776T2v0pu15f180q040Oad030w0E0c0b4h400000000h4g000000014h000000004h400000000p21iFyUF5d0mohkOf1AqoKIb92Rxo4mEkM9jkag5cZ7MU1j5Ogm55wNq8J4mybh5EyQhq8J4mybh5EyQhq8E00"
+			);
+			function togglePlay() {
+				if (synth.isPlayingSong) {
+					synth.pause();
+				} else {
+					synth.play();
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -145,12 +145,20 @@ Cat = (function () {
 		window.dispatchEvent(wfLucidWakeEvent);
 	}
 
+	var on_songlink_signal = function(songlink) {
+		let songlinkEvent = new Event("songlink", {});
+		console.log(`play song @ ${songlink}`);
+		songlinkEvent['songlink'] = songlink;
+		window.dispatchEvent(songlinkEvent);
+	}
+
 	return {
 		boot : boot,
 		try_start_game : try_start_game,
 		set_game_size : set_game_size,
 		on_windfish_awakened : on_windfish_awakened,
 		on_windfish_lucidwake : on_windfish_lucidwake,
+		on_songlink_signal : on_songlink_signal,
 	}
 }());
 
