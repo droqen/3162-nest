@@ -79,21 +79,55 @@
 				})
 
 				let synth;
+				let audioContextStarted = false;
+
+				function synthTogglePlay() {
+					if (synth != null) {
+						if (!audioContextStarted) {
+							audioContextStarted = true;
+							synth.play();
+						} else if (synth.isPlayingSong) {
+							synth.pause();
+						} else {
+							synth.play();
+						}
+					}
+				}
 
 				window.addEventListener('songlink', (args)=>{
 					// todo songlink
 					let songlink_full = args['songlink'];
+					document.getElementById("musiclinka").setAttribute('onclick', 'window.open("' +songlink_full+ '", "_blank")');
+					console.log('musiclinka',document.getElementById("musiclinka"),document.getElementById("musiclinka").onclick);
 					let hash_index = songlink_full.indexOf('#');
+					console.log("songlink",songlink_full,hash_index);
 					if (hash_index >= 0) {
 						let songcode = songlink_full.substr(hash_index);
 						if (synth != null) { synth.pause(); }
 						synth = new beepbox.Synth(songcode);
-						synth.play(); // might not be necessary?
-						// if (synth.isPlayingSong) {}
+						synth.volume = 0.1;
+						if (audioContextStarted) {
+							synth.play();
+							document.getElementById("musiclinkspan").style.display = '';
+							document.getElementById("musictoggle").style.display = '';
+						}
 					} else {
 						console.log('invalid songlink');
+						document.getElementById("musiclinkspan").style.display = 'none';
+						document.getElementById("musictoggle").style.display = 'none';
 					}
 				})
+				window.addEventListener("click", (event) => {
+					if (!audioContextStarted) {
+						if (synth != null) {
+							synth.play();
+							document.getElementById("musiclinkspan").style.display = '';
+							document.getElementById("musiclinka").innerText = 'src';
+							document.getElementById("musictoggle").style.display = '';
+						}
+						audioContextStarted = true;
+					}
+				});
 
 				function resizeCanvas() {
 					let pw = canvasParent.clientWidth;	
@@ -128,7 +162,17 @@
 			<div id='gamecontrols'><?php
 				
 				if (isset($gamebeeplink))  {
-					echo "<a href='$gamebeeplink' target='_blank'>play game music</a> <span style='font-size:85%;'>(opens in new tab)</span><br/>";
+					echo "<span id='musiclinkspan'>";
+						echo "<button id='musictoggle' onclick='synthTogglePlay();' style='display:none;'>play/pause</button>";
+						echo "<button onclick='window.open(\"$gamebeeplink\", \"_blank\")' id='musiclinka'>beepbox link</button>";
+						// echo " <span style='font-size:85%;'>(opens in new tab)</span>";
+					echo "<br/></span>";
+				} else {
+					echo "<span id='musiclinkspan' style='display:none;'>";
+						echo "<button id='musictoggle' onclick='synthTogglePlay();'>play/pause</button>";
+						echo "<button id='musiclinka'>beepbox link</button>";
+						// echo " <span style='font-size:85%;'>(opens in new tab)</span>";
+					echo "<br/></span>";
 				}
 
 				if (isset($gamecontrols) and $gamecontrols != null) {
@@ -136,6 +180,7 @@
 				} else {
 					echo 'keyboard: wsad/↑↓←→ ';
 				}
+				
 			?></div>
 			<div id='imdroqen'><a href='/droqen.php'>i'm droqen!</a></div>
 		</div>
