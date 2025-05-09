@@ -3507,7 +3507,7 @@ var beepbox = (function (exports) {
             this.layeredInstruments = false;
             this.patternInstruments = false;
             this.title = "Unnamed";
-            document.title = this.title + " - " + EditorConfig.versionDisplayName;
+            // document.title = this.title + " - " + EditorConfig.versionDisplayName;
             if (andResetChannels) {
                 this.pitchChannelCount = 3;
                 this.noiseChannelCount = 1;
@@ -4100,7 +4100,7 @@ var beepbox = (function (exports) {
                         {
                             var songNameLength = (base64CharCodeToInt[compressed.charCodeAt(charIndex++)] << 6) + base64CharCodeToInt[compressed.charCodeAt(charIndex++)];
                             this.title = decodeURIComponent(compressed.substring(charIndex, charIndex + songNameLength));
-                            document.title = this.title + " - " + EditorConfig.versionDisplayName;
+                            // document.title = this.title + " - " + EditorConfig.versionDisplayName;
                             charIndex += songNameLength;
                         }
                         break;
